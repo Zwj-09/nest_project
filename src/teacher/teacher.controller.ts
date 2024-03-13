@@ -3,6 +3,7 @@ import {
   Get,
   Param,
   Delete,
+  UseGuards,
   // OnModuleInit,
   // OnApplicationBootstrap,
   // OnModuleDestroy,
@@ -10,6 +11,7 @@ import {
   // OnApplicationShutdown,
 } from '@nestjs/common';
 import { TeacherService } from './teacher.service';
+import { LoginGuard } from 'src/MiddleWare/login.guard';
 
 @Controller('teacher')
 // implements
@@ -44,6 +46,7 @@ export class TeacherController {
   }
 
   @Get(':id')
+  @UseGuards(LoginGuard)
   findOne(@Param('id') id: string) {
     return this.teacherService.findOne(+id);
   }
